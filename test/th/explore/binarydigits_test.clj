@@ -4,5 +4,4 @@
 
 (deftest hello
   (testing "Things work"
-    (prn 99)
     (is (= 1 1))))
