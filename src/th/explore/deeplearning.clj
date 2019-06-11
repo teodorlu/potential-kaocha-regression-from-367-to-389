@@ -62,5 +62,3 @@
 ;; How should we run this?
 
 ;; We need to have the first one respond true only to the frist two digits.
-
-(def )
