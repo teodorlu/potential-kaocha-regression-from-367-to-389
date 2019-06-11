@@ -1,4 +1,4 @@
 # Development environment with nREPL middleware
 
 dev:
-	clojure -A:cider
+	clojure -A:test:cider
