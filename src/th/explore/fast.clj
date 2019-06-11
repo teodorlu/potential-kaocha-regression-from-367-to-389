@@ -1,5 +1,4 @@
-(ns th.explore.fast
-  )
+(ns th.explore.fast)
 
 ;; Can we get some fast operations going with TVM? But what does that even look
 ;; like? Is simply adding up matrices and vectors too primitive?
