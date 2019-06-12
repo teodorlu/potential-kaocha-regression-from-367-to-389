@@ -3,7 +3,7 @@
 # Dev is a phony target since it doesn't produce a file
 .PHONY: dev
 dev:
-	clojure -A:cider
+	clojure -A:cider:test-paths
 
 .PHONY: test
 test:

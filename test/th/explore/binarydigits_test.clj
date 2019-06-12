@@ -6,12 +6,8 @@
 ;; Goal
 ;;
 ;; Describe an interface that ensures that we hit our "digit modeling" right.
-;;
-;; That test runner is ridiculously fast! Works well.
 
-(deftest stuf
-  (is 9399))
-
-(deftest hello
-  (testing "Things work"
-    (is (= 1 1))))
+(deftest truthy-heuristics
+  (testing "Values > 0.99 are considered true"
+    (is (digits/probably-true? 0.991))
+    (is (not (digits/probably-true? 0.899)))))

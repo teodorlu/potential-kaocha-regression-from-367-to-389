@@ -4,7 +4,7 @@
         }
  :aliases
  {:test {
-         ;; :extra-paths ["test"]
+         :extra-paths ["test"]
          :extra-deps {
                       ;; org.clojure/test.check {:mvn/version "RELEASE"}
                       ;; lambdaisland/kaocha {:mvn/version "0.0-367"} ; Latest working
