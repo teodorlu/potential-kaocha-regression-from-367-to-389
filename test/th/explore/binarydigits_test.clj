@@ -23,6 +23,15 @@
     (is (not (falsey? 0.02)))
     (is (not (falsey? 0.012)))))
 
+(deftest valid-boolean-signals
+  (testing "Truthyness heuristic accepts ranges of 0 <= x <= 0.01 and 0.99 <= x <= 1"
+    (doseq [[num expected-to-be-valid?] [[-0.4 false]
+                                         [0 true] [0.003 true]
+                                         [0.1 false] [0.2 false] [0.5 false] [0.8 false]
+                                         [0.991 true] [1 true]
+                                         [1.1 false]]]
+      (is (= expected-to-be-valid? (digits/valid-boolean-signal? num))))))
+
 ;; Now, what does our transformation look like? We need those neurons.
 
 (deftest dotproduct
@@ -52,5 +61,4 @@
 
 (deftest digit-to-binary-conversions
   (is digits/binary-target-sigmoid)
-  (is (truthy?))
   )

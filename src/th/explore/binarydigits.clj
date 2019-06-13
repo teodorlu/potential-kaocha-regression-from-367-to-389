@@ -3,12 +3,12 @@
 (defn truthy?
   "We represent true as values 0.99 < prob < 1"
   [prob]
-  (> prob 0.99))
+  (>= prob 0.99))
 
 (defn falsey?
   "We represent false as values 0 < prob < 0.01"
   [prob]
-  (< prob 0.01))
+  (<= prob 0.01))
 
 (defn make-sigmoid
   "Create an object with weights and bias for use later"
@@ -62,3 +62,45 @@
 
 (def binary-target-sigmoid
   (make-sigmoid [] 0))
+
+(defn valid-boolean-signal? [num]
+  (and (>= num 0)
+       (<= num 1)
+       (or (truthy? num)
+           (falsey? num))))
+
+(def invalid-boolean-signal? (complement valid-boolean-signal?))
+
+(comment
+  (for [num [-0.4 0 0.003 0.1 0.2 0.5 0.8 0.991 1 1.1]]
+    [num (valid-boolean-signal? num)])
+  ;; => ([-0.4 false]
+  ;;     [0 true]
+  ;;     [0.003 true]
+  ;;     [0.1 false]
+  ;;     [0.2 false]
+  ;;     [0.5 false]
+  ;;     [0.8 false]
+  ;;     [0.991 true]
+  ;;     [1 true]
+  ;;     [1.1 false])
+
+  (prn (vec (for [num [-0.4 0 0.003 0.1 0.2 0.5 0.8 0.991 1 1.1]]
+              [num (valid-boolean-signal? num)])))
+
+
+  ;; Looks good
+  )
+
+(do
+  (defn binary-signals-to-number [binaries]
+    (if (any?
+         (map invalid-boolean-signal? binaries))
+      nil
+      (vec (for [b binaries]
+             (if (> b 0.5)
+               1
+               0))))
+    )
+  [(binary-signals-to-number [0.999 0.999])]
+ )
