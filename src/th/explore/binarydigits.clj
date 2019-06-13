@@ -9,16 +9,30 @@
 (defn probably-false? [prob]
   (< prob 0.01))
 
-(def target-activations {0 [0 0 0 0]
-                         1 [0 0 0 1]
-                         2 [0 0 1 0]
-                         3 [0 0 1 1]
-                         4 [0 1 0 0]
-                         5 [0 1 0 1]
-                         6 [0 1 1 0]
-                         7 [0 1 1 1]
-                         8 [1 0 0 0]
-                         9 [1 0 0 1]})
+(defn make-sigmoid [weights bias]
+  {:weights weights
+   :bias bias})
 
-;; But I need a way to run the neurons as well. How do I run one with some input?
-;; And for each one, ..., they could just be run with "arguments" as the xs.
+(defn sigmoid-z [z]
+  (/ 1
+     (+ 1 (Math/exp (- z)))))
+
+(defn dotproduct [x y]
+  (reduce + (map * x y)))
+
+(defn run-sigmoid [sigmoid x]
+  (let [{:keys [weights bias]} sigmoid]
+    (sigmoid-z (+ (dotproduct weights x)
+                  bias))))
+
+(def binary-target-activations
+  {0 [0 0 0 0]
+   1 [0 0 0 1]
+   2 [0 0 1 0]
+   3 [0 0 1 1]
+   4 [0 1 0 0]
+   5 [0 1 0 1]
+   6 [0 1 1 0]
+   7 [0 1 1 1]
+   8 [1 0 0 0]
+   9 [1 0 0 1]})
