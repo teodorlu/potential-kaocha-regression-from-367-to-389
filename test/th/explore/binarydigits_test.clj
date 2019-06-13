@@ -1,5 +1,7 @@
 (ns th.explore.binarydigits-test
-  (:require [th.explore.binarydigits :as digits]
+  (:require [th.explore.binarydigits
+             :as digits
+             :refer [truthy? falsey? make-sigmoid run-sigmoid]]
             [clojure.test :refer :all]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -14,14 +16,37 @@
 
 (deftest truthy-heuristics
   (testing "Values > 0.99 are considered true"
-    (is (digits/probably-true? 0.991))
-    (is (not (digits/probably-true? 0.899))))
+    (is (truthy? 0.991))
+    (is (not (truthy? 0.899))))
   (testing "Values < 0.01 are considered false"
-    (is (digits/probably-false? 0.006))
-    (is (not (digits/probably-false? 0.02)))
-    (is (not (digits/probably-false? 0.012)))))
+    (is (falsey? 0.006))
+    (is (not (falsey? 0.02)))
+    (is (not (falsey? 0.012)))))
 
 ;; Now, what does our transformation look like? We need those neurons.
 
-(deftest transform-api
-  (is digits/foo))
+(deftest dotproduct
+  (is (= (digits/dotproduct [1 2] [3 4])
+         11)))
+
+(deftest sigmoid-truthyness-limit
+  (let [prob-limit 5]
+    (is 1)
+    (testing "Sigmoid truthyness when we reach above the limit"
+      (testing "... by increasing bias"
+        (is (truthy? (run-sigmoid (make-sigmoid [0] prob-limit)
+                                [0]))))
+      (testing "... by increasing weights"
+        (is (truthy? (run-sigmoid (make-sigmoid [prob-limit] 0)
+                                  [1])))))
+
+    (testing "Sigmoid falseyness when we reach below the limit"
+      (testing "... by increasing bias"
+        (is (falsey? (run-sigmoid (make-sigmoid [0] (- prob-limit)
+                                                )
+                                  [0]))))
+      (testing "... by increasing weights"
+        (is (falsey? (run-sigmoid (make-sigmoid [prob-limit] 0)
+                                  [-1])))))
+
+    ))

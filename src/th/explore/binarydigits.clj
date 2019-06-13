@@ -3,12 +3,12 @@
 (defn foo "Before the name comes the function"
   [])
 
-(defn probably-true?
+(defn truthy?
   "We represent true as values 0.99 < prob < 1"
   [prob]
   (> prob 0.99))
 
-(defn probably-false?
+(defn falsey?
   "We represent false as values 0 < prob < 0.01"
   [prob]
   (< prob 0.01))
