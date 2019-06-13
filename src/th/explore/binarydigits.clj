@@ -1,4 +1,5 @@
-(ns th.explore.binarydigits)
+(ns th.explore.binarydigits
+  "Partial implementation of digits-as-sigmoids from http://neuralnetworksanddeeplearning.com/chap1.html")
 
 (defn truthy?
   "We represent true as values 0.99 < prob < 1"
