@@ -23,6 +23,18 @@
   (/ 1
      (+ 1 (Math/exp (- z)))))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; A short note on the sigmoid function.
+;;
+;; The sigmoid function normalizes inputs. Regardless of how large the weights
+;; are, we get a standard output range. This eases composition. We know what our
+;; inputs are going to be -- they are going to be in (0, 1). So we'll just
+;; assume that. And we know that a result of 5 will produce something
+;; that's "really true".
+;;
+;; In other words, the sigmoid function makes composition easier. That's a good
+;; thing!
+
 (defn dotproduct
   "The dot product (inner product) of two vectors"
   [x y]
