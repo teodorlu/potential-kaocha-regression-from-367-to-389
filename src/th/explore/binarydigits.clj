@@ -1,8 +1,5 @@
 (ns th.explore.binarydigits)
 
-(defn foo "Before the name comes the function"
-  [])
-
 (defn truthy?
   "We represent true as values 0.99 < prob < 1"
   [prob]
@@ -49,3 +46,19 @@
    7 [0 1 1 1]
    8 [1 0 0 0]
    9 [1 0 0 1]})
+
+(defn make-signal-encodings
+  "Create a map with encodings for the numbers 0..n"
+  [n]
+  (let [zero-vec (vec (repeat n 0))
+        create-single-signal (fn [x]
+                               (assoc zero-vec x 1))]
+    (into {}
+          (for [x (range n)]
+            [x (create-single-signal x)]))))
+
+(def single-digit-signal-encodings
+  (make-signal-encodings 10))
+
+(def binary-target-sigmoid
+  (make-sigmoid [] 0))

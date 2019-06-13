@@ -48,5 +48,9 @@
       (testing "... by increasing weights"
         (is (falsey? (run-sigmoid (make-sigmoid [prob-limit] 0)
                                   [-1])))))
-
     ))
+
+(deftest digit-to-binary-conversions
+  (is digits/binary-target-sigmoid)
+  (is (truthy?))
+  )
