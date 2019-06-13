@@ -24,7 +24,7 @@
     (is (not (falsey? 0.012)))))
 
 (deftest valid-boolean-signals
-  (testing "Truthyness heuristic accepts ranges of 0 <= x <= 0.01 and 0.99 <= x <= 1"
+  (testing "Truthyness heuristic accepts ranges of 0 <= x <= 0.01 or 0.99 <= x <= 1"
     (doseq [[num expected-to-be-valid?] [[-0.4 false]
                                          [0 true] [0.003 true]
                                          [0.1 false] [0.2 false] [0.5 false] [0.8 false]

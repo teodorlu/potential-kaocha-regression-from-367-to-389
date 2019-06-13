@@ -63,34 +63,15 @@
 (def binary-target-sigmoid
   (make-sigmoid [] 0))
 
-(defn valid-boolean-signal? [num]
-  (and (>= num 0)
-       (<= num 1)
-       (or (truthy? num)
-           (falsey? num))))
+(defn valid-boolean-signal?
+  "0 <= x <= 0.01 or 0.99 <= x <= 1"
+  [x]
+  (and (>= x 0)
+       (<= x 1)
+       (or (truthy? x)
+           (falsey? x))))
 
 (def invalid-boolean-signal? (complement valid-boolean-signal?))
-
-(comment
-  (for [num [-0.4 0 0.003 0.1 0.2 0.5 0.8 0.991 1 1.1]]
-    [num (valid-boolean-signal? num)])
-  ;; => ([-0.4 false]
-  ;;     [0 true]
-  ;;     [0.003 true]
-  ;;     [0.1 false]
-  ;;     [0.2 false]
-  ;;     [0.5 false]
-  ;;     [0.8 false]
-  ;;     [0.991 true]
-  ;;     [1 true]
-  ;;     [1.1 false])
-
-  (prn (vec (for [num [-0.4 0 0.003 0.1 0.2 0.5 0.8 0.991 1 1.1]]
-              [num (valid-boolean-signal? num)])))
-
-
-  ;; Looks good
-  )
 
 (do
   (defn binary-signals-to-number [binaries]
