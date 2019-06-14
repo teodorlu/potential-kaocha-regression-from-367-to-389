@@ -1,16 +1,2 @@
 {:paths ["resources" "src"]
- :deps {org.clojure/clojure {:mvn/version "1.10.0"}
-        ;; tvm-clj {:mvn/version "4.6"}
-        }
- :aliases
- {:test {
-         ;; :extra-paths ["test"]
-         :extra-deps {
-                      ;; org.clojure/test.check {:mvn/version "RELEASE"}
-                      lambdaisland/kaocha {:mvn/version "0.0-367"}
-                      }}
-
-  :cider
-  {:extra-deps {cider/cider-nrepl {:mvn/version "0.22.0-beta4"}}
-   :main-opts ["-m" "nrepl.cmdline" "--middleware" "[cider.nrepl/cider-middleware]"]}
-  }}
+ :deps {org.clojure/clojure {:mvn/version "1.10.0"}}}
