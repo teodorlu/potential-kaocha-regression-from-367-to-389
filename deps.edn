@@ -7,7 +7,9 @@
          ;; :extra-paths ["test"]
          :extra-deps {
                       ;; org.clojure/test.check {:mvn/version "RELEASE"}
-                      lambdaisland/kaocha {:mvn/version "0.0-367"}
+                      ;; lambdaisland/kaocha {:mvn/version "0.0-367"} ; Latest working
+                      ;; lambdaisland/kaocha {:mvn/version "0.0-418"}    ; Latest not-working pre stuff --  just hangs
+                      lambdaisland/kaocha {:mvn/version "0.0-521"}
                       }}
 
   :cider
